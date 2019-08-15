@@ -6,6 +6,7 @@ var instrucciones = [
 ];
 // Arreglo para ir guardando los movimientos que se vayan realizando
 var movimientos = [];
+var movimientoActual;
 
 // Representación de la grilla. Cada número representa a una pieza.
 // El 9 es la posición vacía
@@ -27,8 +28,7 @@ Podés ver su implementación en la ultima parte de este codigo. */
 function mostrarInstrucciones(instrucciones) {
       //COMPLETAR
       for(var i=0;i<instrucciones.length;i++){
-        console.log(instrucciones[i]);
-        mostrarInstruccionEnLista(instrucciones[i],"lista-instrucciones");
+          mostrarInstruccionEnLista(instrucciones[i],"lista-instrucciones");
 
       }
 }
@@ -36,9 +36,7 @@ function mostrarInstrucciones(instrucciones) {
 /* COMPLETAR: Crear función que agregue la última dirección al arreglo de movimientos
 y utilice actualizarUltimoMovimiento para mostrarlo en pantalla */
 function agregarMovimiento(){
-  var movimientoActual;
-  movimientos.push();
-
+  
 }
 
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
@@ -233,9 +231,13 @@ function capturarTeclas() {
       evento.which === codigosDireccion.ARRIBA ||
       evento.which === codigosDireccion.DERECHA ||
       evento.which === codigosDireccion.IZQUIERDA) {
+        movimientoActual=evento.which;
+        movimientos.push(movimientoActual);
+        console.log(movimientos);
+        actualizarUltimoMovimiento(movimientoActual);
 
       moverEnDireccion(evento.which);
-
+      
         var gano = chequearSiGano();
         if (gano) {
           setTimeout(function() {
@@ -246,6 +248,7 @@ function capturarTeclas() {
         }
     })
 }
+
 
 /* Se inicia el rompecabezas mezclando las piezas 60 veces 
 y ejecutando la función para que se capturen las teclas que 
