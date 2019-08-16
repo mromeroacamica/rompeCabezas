@@ -7,6 +7,7 @@ var instrucciones = [
 // Arreglo para ir guardando los movimientos que se vayan realizando
 var movimientos = [];
 var movimientoActual;
+var condicion;
 
 // Representación de la grilla. Cada número representa a una pieza.
 // El 9 es la posición vacía
@@ -50,8 +51,7 @@ function chequearSiGano() {
   var grillaActual;
   var grillaGanadoraActual;
   var todasCorrectas=0;
-  var condicion;
-    //COMPLETAR
+  //COMPLETAR
     for(i=0; i<grilla.length; i++){
         for(j=0; j<grilla.length; j++){
         //grillaActual=grilla[i][j];
@@ -62,9 +62,10 @@ function chequearSiGano() {
       }
     }
     }
-    console.log(todasCorrectas)
+    //console.log(todasCorrectas)
     if(todasCorrectas===9){
-      condicion=true;      
+      condicion=true; 
+      mostrarCartelGanador();     
       return
     }else{
       condicion=false;
@@ -73,9 +74,11 @@ function chequearSiGano() {
 }
 
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
+
 function mostrarCartelGanador() {
-    //COMPLETAR
-}
+  alert("HAS GANADO")
+    }
+
 
 /* Función que intercambia dos posiciones en la grilla.
 Pensar como intercambiar dos posiciones en un arreglo de arreglos. 
