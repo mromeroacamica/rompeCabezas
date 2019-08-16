@@ -8,6 +8,11 @@ var instrucciones = [
 var movimientos = [];
 var movimientoActual;
 var condicion;
+var filaPos1=filaVacia;
+var columnaPos2=columnaVacia;
+var filaPos2= 0;
+var filaPos2=0;
+
 
 // Representación de la grilla. Cada número representa a una pieza.
 // El 9 es la posición vacía
@@ -19,7 +24,7 @@ var grilla = [
 var grillaGanadora=[
   [1, 2, 3],
   [4, 5, 6],
-  [7, 8, 9],
+  [7, 8, 10],
 ];
 
 /* Estas dos variables son para guardar la posición de la pieza vacía. 
@@ -90,8 +95,13 @@ arreglo[0][0] = arreglo[1][2];
 En vez de intercambiar esos valores vamos a terminar teniendo en ambas posiciones el mismo valor.
 Se te ocurre cómo solucionar esto con una variable temporal?
 */
+
 function intercambiarPosicionesGrilla(filaPos1, columnaPos1, filaPos2, columnaPos2) {
     //COMPLETAR
+    var posicion1= grilla[filaPos1][columnaPos1];
+    var posicion2=grilla[filaPos2][columnaPos2];
+    console.log(posicion1);
+    console.log(posicion2);
 }
 
 // Actualiza la posición de la pieza vacía
