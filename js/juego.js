@@ -233,8 +233,7 @@ function capturarTeclas() {
       evento.which === codigosDireccion.IZQUIERDA) {
         movimientoActual=evento.which;
         movimientos.push(movimientoActual);
-        console.log(movimientos);
-        actualizarUltimoMovimiento(movimientoActual);
+        actualizarUltimoMovimiento(movimientos[movimientos.length-1]);
 
       moverEnDireccion(evento.which);
       
