@@ -9,9 +9,9 @@ var movimientos = [];
 var movimientoActual;
 var condicion;
 var filaPos1=filaVacia;
-var columnaPos2=columnaVacia;
-var filaPos2= 0;
-var filaPos2=0;
+var columnaPos1=columnaVacia;
+var filaPos2;
+var columnaPos2;
 
 
 // Representación de la grilla. Cada número representa a una pieza.
@@ -95,13 +95,19 @@ arreglo[0][0] = arreglo[1][2];
 En vez de intercambiar esos valores vamos a terminar teniendo en ambas posiciones el mismo valor.
 Se te ocurre cómo solucionar esto con una variable temporal?
 */
+var piezaVacia;
+var piezaIntercambiar;
 
-function intercambiarPosicionesGrilla(filaPos1, columnaPos1, filaPos2, columnaPos2) {
+function intercambiarPosicionesGrilla(filaVacia, columnaVacia, filaPos2, columnaPos2) {
     //COMPLETAR
-    var posicion1= grilla[filaPos1][columnaPos1];
-    var posicion2=grilla[filaPos2][columnaPos2];
-    console.log(posicion1);
-    console.log(posicion2);
+     if(movimientoActual===37){
+      piezaVacia=grilla[filaVacia][columnaVacia];
+      piezaIntercambiar=grilla[filaVacia][columnaVacia-1];
+      grilla[filaVacia][columnaVacia]=piezaIntercambiar;
+      grilla[filaVacia][columnaVacia-1]=piezaVacia;      
+      columnaVacia--;
+    }
+
 }
 
 // Actualiza la posición de la pieza vacía
@@ -274,7 +280,14 @@ function capturarTeclas() {
         movimientoActual=evento.which;
         movimientos.push(movimientoActual);
        actualizarUltimoMovimiento(movimientos[movimientos.length-1]);
-
+console.log(movimientos);
+if(movimientoActual===37){
+  piezaVacia=grilla[filaVacia][columnaVacia];
+  piezaIntercambiar=grilla[filaVacia][columnaVacia-1];
+  grilla[filaVacia][columnaVacia]=piezaIntercambiar;
+  grilla[filaVacia][columnaVacia-1]=piezaVacia;      
+  columnaVacia--;
+}
       moverEnDireccion(evento.which);
       
         var gano = chequearSiGano();
