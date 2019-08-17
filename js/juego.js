@@ -8,10 +8,7 @@ var instrucciones = [
 var movimientos = [];
 var movimientoActual;
 var condicion;
-var filaPos1=filaVacia;
-var columnaPos1=columnaVacia;
-var filaPos2;
-var columnaPos2;
+
 
 
 // Representación de la grilla. Cada número representa a una pieza.
@@ -31,6 +28,10 @@ var grillaGanadora=[
 Esta posición comienza siendo la [2, 2]*/
 var filaVacia = 2;
 var columnaVacia = 2;
+var filaPos1= filaVacia;
+var columnaPos1= columnaVacia;
+var filaPos2;
+var columnaPos2;
 
 /* Esta función deberá recorrer el arreglo de instrucciones pasado por parámetro. 
 Cada elemento de este arreglo deberá ser mostrado en la lista con id 'lista-instrucciones'. 
@@ -98,15 +99,14 @@ Se te ocurre cómo solucionar esto con una variable temporal?
 var piezaVacia;
 var piezaIntercambiar;
 
-function intercambiarPosicionesGrilla(filaVacia, columnaVacia, filaPos2, columnaPos2) {
+function intercambiarPosicionesGrilla(filaPos1, columnaPos1, filaPos2, columnaPos2) {
     //COMPLETAR
-     if(movimientoActual===37){
-      piezaVacia=grilla[filaVacia][columnaVacia];
-      piezaIntercambiar=grilla[filaVacia][columnaVacia-1];
-      grilla[filaVacia][columnaVacia]=piezaIntercambiar;
-      grilla[filaVacia][columnaVacia-1]=piezaVacia;      
-      columnaVacia--;
-    }
+    piezaVacia=grilla[filaPos1][columnaPos1];
+    piezaIntercambiar=grilla[filaPos2][columnaPos2];
+    grilla[filaPos1][columnaPos1]=piezaIntercambiar;
+    grilla[filaPos2][columnaPos2]=piezaVacia;      
+     
+    
 
 }
 
@@ -197,7 +197,6 @@ function intercambiarPosiciones(fila1, columna1, fila2, columna2) {
   intercambiarPosicionesDOM('pieza' + pieza1, 'pieza' + pieza2);
 
 }
-
 /* Intercambio de posiciones de los elementos del DOM que representan
 las fichas en la pantalla */
 
@@ -231,6 +230,9 @@ function actualizarUltimoMovimiento(direccion) {
       break;
     case codigosDireccion.IZQUIERDA:
       ultimoMov.textContent = '←';
+      filaPos2=filaVacia;
+      columnaPos2=columnaVacia-1;
+      columnaVacia--;
       break;
   }
 }
@@ -280,14 +282,8 @@ function capturarTeclas() {
         movimientoActual=evento.which;
         movimientos.push(movimientoActual);
        actualizarUltimoMovimiento(movimientos[movimientos.length-1]);
-console.log(movimientos);
-if(movimientoActual===37){
-  piezaVacia=grilla[filaVacia][columnaVacia];
-  piezaIntercambiar=grilla[filaVacia][columnaVacia-1];
-  grilla[filaVacia][columnaVacia]=piezaIntercambiar;
-  grilla[filaVacia][columnaVacia-1]=piezaVacia;      
-  columnaVacia--;
-}
+      console.log(movimientos);
+
       moverEnDireccion(evento.which);
       
         var gano = chequearSiGano();
@@ -301,10 +297,10 @@ if(movimientoActual===37){
     })
 }
 
-
 /* Se inicia el rompecabezas mezclando las piezas 60 veces 
 y ejecutando la función para que se capturen las teclas que 
 presiona el usuario */
+
 function iniciar() {
     mostrarInstrucciones(instrucciones);
     mezclarPiezas(30);
