@@ -101,11 +101,9 @@ var piezaIntercambiar;
 
 function intercambiarPosicionesGrilla(filaPos1, columnaPos1, filaPos2, columnaPos2) {
     //COMPLETAR
-    piezaVacia=grilla[filaPos1][columnaPos1];
-    piezaIntercambiar=grilla[filaPos2][columnaPos2];
-    grilla[filaPos1][columnaPos1]=piezaIntercambiar;
-    grilla[filaPos2][columnaPos2]=piezaVacia;      
-     
+    var temporal = grilla[filaPos1][columnaPos1];
+    grilla[filaPos1][columnaPos1] =  grilla[filaPos2][columnaPos2];
+    grilla[filaPos2][columnaPos2] = temporal;
     
 
 }
@@ -118,6 +116,11 @@ function actualizarPosicionVacia(nuevaFila, nuevaColumna) {
 
 // Para chequear si la posicón está dentro de la grilla.
 function posicionValida(fila, columna) {
+  if(fila>=0 && fila<=2 && columna>=0 && columna<=2){
+    return true;
+  }else{
+    return false;
+  }
     //COMPLETAR
 }
 
@@ -141,11 +144,15 @@ function moverEnDireccion(direccion) {
     
   // Mueve pieza hacia la derecha, reemplazandola con la blanca
   else if (direccion === codigosDireccion.DERECHA) {
+    nuevaFilaPiezaVacia= filaVacia;
+    nuevaColumnaPiezaVacia=columnaVacia-1;
     //COMPLETAR
   }
     
   // Mueve pieza hacia la izquierda, reemplazandola con la blanca
   else if (direccion === codigosDireccion.IZQUIERDA) {
+    nuevaFilaPiezaVacia=filaVacia;
+    nuevaColumnaPiezaVacia=columnaVacia+1;
     // COMPLETAR
   }
 
@@ -230,9 +237,6 @@ function actualizarUltimoMovimiento(direccion) {
       break;
     case codigosDireccion.IZQUIERDA:
       ultimoMov.textContent = '←';
-      filaPos2=filaVacia;
-      columnaPos2=columnaVacia-1;
-      columnaVacia--;
       break;
   }
 }
