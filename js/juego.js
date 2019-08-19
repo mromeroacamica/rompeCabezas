@@ -21,7 +21,7 @@ var grilla = [
 var grillaGanadora=[
   [1, 2, 3],
   [4, 5, 6],
-  [7, 8, 10],
+  [7, 8, 9],
 ];
 
 /* Estas dos variables son para guardar la posición de la pieza vacía. 
@@ -48,7 +48,9 @@ function mostrarInstrucciones(instrucciones) {
 /* COMPLETAR: Crear función que agregue la última dirección al arreglo de movimientos
 y utilice actualizarUltimoMovimiento para mostrarlo en pantalla */
 function agregarMovimiento(){
-  
+  movimientos.push(movimientoActual);
+       actualizarUltimoMovimiento(movimientos[movimientos.length-1]);
+      console.log(movimientos);
 }
 
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
@@ -56,7 +58,7 @@ Existen diferentes formas de hacer este chequeo a partir de la grilla. */
 function chequearSiGano() {
   var grillaActual;
   var grillaGanadoraActual;
-  var todasCorrectas=0;
+var todasCorrectas=0;
   //COMPLETAR
     for(i=0; i<grilla.length; i++){
         for(j=0; j<grilla.length; j++){
@@ -111,6 +113,8 @@ function intercambiarPosicionesGrilla(filaPos1, columnaPos1, filaPos2, columnaPo
 // Actualiza la posición de la pieza vacía
 function actualizarPosicionVacia(nuevaFila, nuevaColumna) {
     //COMPLETAR
+    filaVacia=nuevaFila;
+    columnaVacia=nuevaColumna;
 }
 
 
@@ -121,7 +125,7 @@ function posicionValida(fila, columna) {
   }else{
     return false;
   }
-    //COMPLETAR
+
 }
 
 /* Movimiento de fichas, en este caso la que se mueve es la blanca intercambiando su posición con otro elemento.
@@ -132,29 +136,28 @@ function moverEnDireccion(direccion) {
 
   // Mueve pieza hacia la abajo, reemplazandola con la blanca
   if (direccion === codigosDireccion.ABAJO) {
-    nuevaFilaPiezaVacia = filaVacia - 1;
+    nuevaFilaPiezaVacia = filaVacia + 1;
     nuevaColumnaPiezaVacia = columnaVacia;
-  }
+    }
     
   // Mueve pieza hacia arriba, reemplazandola con la blanca
   else if (direccion === codigosDireccion.ARRIBA) {
-    nuevaFilaPiezaVacia = filaVacia + 1;
+    nuevaFilaPiezaVacia = filaVacia - 1;
     nuevaColumnaPiezaVacia = columnaVacia;
+  
   }
     
   // Mueve pieza hacia la derecha, reemplazandola con la blanca
   else if (direccion === codigosDireccion.DERECHA) {
     nuevaFilaPiezaVacia= filaVacia;
-    nuevaColumnaPiezaVacia=columnaVacia-1;
-    //COMPLETAR
-  }
+    nuevaColumnaPiezaVacia=columnaVacia+1;
+     }
     
   // Mueve pieza hacia la izquierda, reemplazandola con la blanca
   else if (direccion === codigosDireccion.IZQUIERDA) {
     nuevaFilaPiezaVacia=filaVacia;
-    nuevaColumnaPiezaVacia=columnaVacia+1;
-    // COMPLETAR
-  }
+    nuevaColumnaPiezaVacia=columnaVacia-1;
+    }
 
   /* A continuación se chequea si la nueva posición es válida, si lo es, se intercambia. 
   Para que esta parte del código funcione correctamente deberás haber implementado 
@@ -163,6 +166,7 @@ function moverEnDireccion(direccion) {
     if (posicionValida(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia)) {
         intercambiarPosiciones(filaVacia, columnaVacia, nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
         actualizarPosicionVacia(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
+        agregarMovimiento();
 
   //COMPLETAR: Agregar la dirección del movimiento al arreglo de movimientos
 
@@ -284,9 +288,7 @@ function capturarTeclas() {
       evento.which === codigosDireccion.DERECHA ||
       evento.which === codigosDireccion.IZQUIERDA) {
         movimientoActual=evento.which;
-        movimientos.push(movimientoActual);
-       actualizarUltimoMovimiento(movimientos[movimientos.length-1]);
-      console.log(movimientos);
+        
 
       moverEnDireccion(evento.which);
       
